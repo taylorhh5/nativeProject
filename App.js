@@ -8,9 +8,13 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard
 } from "react-native";
 import Header from "./components/Header";
 import TodoItem from './components/TodoItem'
+import AddTodo from './components/AddTodo'
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -25,13 +29,36 @@ export default function App() {
     })
   }
 
+  const submitHandler =(text) => {
+
+    if(text.length > 3){
+ setTodos(() => {
+      return [...todos, {text: text, key: Math.random().toString()}]
+    })
+
+    }
+    else{
+      Alert.alert('OOPS!', 'Todos must be over 3 letters long', [
+        {text: "Understood" , onPress: () => console.log("alert closed")}
+      ])
+    }
+
+   
+  }
+
 
   return (
+    <TouchableWithoutFeedback onPress={() =>{
+      Keyboard.dismiss()
+      console.log('dismissed keyboard')
+    } }>
+
     <View style={styles.container}>
       {/* header */}
       <Header />
       <View style={styles.content}>
         {/* TODO Form */}
+        <AddTodo submitHandler={submitHandler}/>
 
         <View style={styles.list}>
           <FlatList
@@ -44,6 +71,7 @@ export default function App() {
         </View>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
