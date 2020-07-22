@@ -11,74 +11,34 @@ import {
 } from "react-native";
 
 export default function App() {
-  const [name, setName] = useState("taylor");
-  const [age, setAge] = useState("32");
+  
 
-  const [people, setPeople] = useState([
-    { name: "Leo", id: "1" },
-    { name: "Don", id: "2" },
-    { name: "Raph", id: "3" },
-    { name: "Mikey", id: "4" },
+  const [todos, setTodos] = useState([
+    { text: 'buy coffee', key: '1' },
+    { text: 'create an app', key: '2' },
+    { text: 'play on the switch', key: '3' }
   ]);
 
-  // const clickHandler = () => {
-  //   setName(!name)
-  // }
-  // const changeText =(val) =>{
-  //   setName(val)
-  // }
-  const pressHandler = (id) => {
-    console.log(id, "the ID")
-    setPeople((people) => {
-return people.filter(person =>person.id != id)
-    })
-  }
 
   return (
     <View style={styles.container}>
-      <Text>Enter name:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="e.g. John Doe"
-        onChangeText={(val) => setName(val)}
-      />
-      <Text>Enter age:</Text>
-      <TextInput
-        keyboardAppearance="dark"
-        // keyboardType="numeric"
-        style={styles.input}
-        placeholder="e.g. 99"
-        onChangeText={(val) => setAge(val)}
-      />
+   {/* header */}
+   <View style={styles.content}>
+{/* TODO Form */}
 
-      <Text>
-        My name is {name} and my age is {age}
-      </Text>
-      <View style={styles.buttonContainer}>
-        {/* <Button title="update state" onPress={clickHandler} /> */}
-      </View>
-      <StatusBar style="auto" />
+<View style={styles.list}>
+<FlatList
+//data
+data={todos}
 
-      <FlatList
-      // numColumns={2}
-        //keyExtractor since no key, ID instead
-        keyExtractor={(item) => item.id}
-        //data to cycle through
-        data={people}
-        //equal to a function that returns some JSX. Destructure item in array
-        renderItem={({ item }) => 
-        <TouchableOpacity onPress={() => pressHandler(item.id)}>
-          <Text style={styles.item}>{item.name} </Text>
-          </TouchableOpacity>
-      }
-      />
-
-      {/* {people.map(item => (
-        <View key={item.id}>
-
-<Text>{item.name} </Text>
-          </View>
-      ))} */}
+//renders the template for each item in the list
+//extract item currently iterating
+renderItem={({item}) =>(
+<Text>{item.text}</Text>
+)}
+/>
+</View>
+   </View>
     </View>
   );
 }
@@ -87,20 +47,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "yellow",
-    alignItems: "center",
-    justifyContent: "center",
+
+    // alignItems: "center",
+    // justifyContent: "center",
   },
-  buttonContainer: {
-    marginTop: 20,
-    backgroundColor: "blue",
+  content: {
+    padding: 40,
   },
 
-  input: {
-    borderWidth: 1,
-    borderColor: "#777",
-    padding: 8,
-    margin: 10,
-    width: 200,
+  list: {
+   
+    marginTop: 20,
+ 
   },
   item: {
     width: 200,
