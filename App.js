@@ -7,6 +7,7 @@ import {
   Button,
   TextInput,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 
 export default function App() {
@@ -26,6 +27,12 @@ export default function App() {
   // const changeText =(val) =>{
   //   setName(val)
   // }
+  const pressHandler = (id) => {
+    console.log(id, "the ID")
+    setPeople((people) => {
+return people.filter(person =>person.id != id)
+    })
+  }
 
   return (
     <View style={styles.container}>
@@ -53,12 +60,17 @@ export default function App() {
       <StatusBar style="auto" />
 
       <FlatList
+      // numColumns={2}
         //keyExtractor since no key, ID instead
         keyExtractor={(item) => item.id}
         //data to cycle through
         data={people}
         //equal to a function that returns some JSX. Destructure item in array
-        renderItem={({ item }) => <Text style={styles.item}>{item.name} </Text>}
+        renderItem={({ item }) => 
+        <TouchableOpacity onPress={() => pressHandler(item.id)}>
+          <Text style={styles.item}>{item.name} </Text>
+          </TouchableOpacity>
+      }
       />
 
       {/* {people.map(item => (
