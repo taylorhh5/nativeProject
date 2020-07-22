@@ -9,6 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import Header from './components/Header'
 
 export default function App() {
   
@@ -23,6 +24,7 @@ export default function App() {
   return (
     <View style={styles.container}>
    {/* header */}
+   <Header/>
    <View style={styles.content}>
 {/* TODO Form */}
 
