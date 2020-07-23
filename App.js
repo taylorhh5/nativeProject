@@ -15,6 +15,7 @@ import {
 import Header from "./components/Header";
 import TodoItem from './components/TodoItem'
 import AddTodo from './components/AddTodo'
+import Sanbox from './components/Sandbox'
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -34,6 +35,7 @@ export default function App() {
     if(text.length > 3){
  setTodos(() => {
       return [...todos, {text: text, key: Math.random().toString()}]
+      
     })
 
     }
@@ -48,6 +50,7 @@ export default function App() {
 
 
   return (
+    // <Sanbox/>
     <TouchableWithoutFeedback onPress={() =>{
       Keyboard.dismiss()
       console.log('dismissed keyboard')
@@ -84,15 +87,16 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
   },
   content: {
+    // backgroundColor:"pink",
     padding: 40,
+    flex:1,
   },
 
   list: {
     marginTop: 20,
+    // backgroundColor: "yellow",
+    flex:1,
+
   },
-  item: {
-    width: 200,
-    marginBottom: 20,
-    backgroundColor: "pink",
-  },
+
 });

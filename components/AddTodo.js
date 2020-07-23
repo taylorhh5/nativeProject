@@ -6,6 +6,7 @@ export default function AddTodo(props) {
 
   const changeHandler = (value) => {
     setText(value);
+ 
   };
   return (
     <View>
@@ -13,8 +14,9 @@ export default function AddTodo(props) {
         style={styles.input}
         placeholder="Add todo"
         onChangeText={changeHandler}
+        value={text}
       />
-      <Button onPress={() => props.submitHandler(text)} title="Add" color="'coral" />
+      <Button onPress={() => {props.submitHandler(text), setText("")}} title="Add" color="coral" />
     </View>
   );
 }
