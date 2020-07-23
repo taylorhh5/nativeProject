@@ -16,7 +16,10 @@ export default function AddTodo(props) {
         onChangeText={changeHandler}
         value={text}
       />
-      <Button onPress={() => {props.submitHandler(text), setText("")}} title="Add" color="coral" />
+      <View style={styles.buttonView}>
+      <Button onPress={() => {props.submitHandler(text), setText("")}} title="Add" color="white" />
+      
+      </View>
     </View>
   );
 }
@@ -29,4 +32,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
   },
+  buttonView:{
+      marginTop:10,
+      backgroundColor:"coral",
+  }
 });
